@@ -1,41 +1,33 @@
 class MangasController < ApplicationController
   before_action :set_manga, only: [:show, :update, :destroy]
 
-  # GET /mangas
+  # GET / mangas
   def index
     @mangas = Manga.all
-
-    render json: @mangas
+    json_response(@mangas)
   end
 
-  # GET /mangas/1
+  # GET / mangas/ :id
   def show
-    render json: @manga
+    json_response(@manga)
   end
 
-  # POST /mangas
+  # POST / mangas
   def create
-    @manga = Manga.new(manga_params)
-
-    if @manga.save
-      render json: @manga, status: :created, location: @manga
-    else
-      render json: @manga.errors, status: :unprocessable_entity
-    end
+    @manga = Manga.create!(manga_params)
+    json_response(@manga, :created)
   end
 
-  # PATCH/PUT /mangas/1
+  # PUT / mangas / :id
   def update
-    if @manga.update(manga_params)
-      render json: @manga
-    else
-      render json: @manga.errors, status: :unprocessable_entity
-    end
+    @manga.update(manga_params)
+    head :no_content
   end
 
-  # DELETE /mangas/1
+  # DELETE / mangas / :id
   def destroy
     @manga.destroy
+    head :no_content
   end
 
   private

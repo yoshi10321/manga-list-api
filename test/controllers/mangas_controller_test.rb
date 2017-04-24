@@ -25,7 +25,7 @@ class MangasControllerTest < ActionDispatch::IntegrationTest
 
   test "should update manga" do
     patch manga_url(@manga), params: { manga: { img: @manga.img, readNumber: @manga.readNumber, title: @manga.title } }, as: :json
-    assert_response 200
+    assert_response 204
   end
 
   test "should destroy manga" do
